@@ -1,0 +1,9 @@
+body{
+    background-image:url("../../../public/back-groound.jpg") ;
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* background-position:center; */
+    margin: 0px;
+    padding: 0px;
+    align-items: center;
+}
