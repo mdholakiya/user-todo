@@ -9,13 +9,16 @@
     border: 2px solid white;
     border-radius: 20px ;
     width: 400px;
-    height:500px;
+    height:650px;
     /* justify-content: center; */
     box-shadow:5px 5px 5px 5px black;
     margin-top:100px;
     font-family:Verdana, Geneva, Tahoma, sans-serif;
 }
-
+.main{
+    display: flex;
+    flex-direction:column;
+}
 .form{
      display:flex;
     align-items: center;
@@ -55,4 +58,23 @@
     width:300px;
     margin: 0px;
     padding: 0px; 
+}
+.loginLink{
+    text-decoration: none;
+    color: rgb(146, 27, 27);
+}
+.login-pass-icon{
+    position: absolute;
+    z-index: 1;
+    /* left: 3rem;
+    top: 3rem; */
+    margin-top: 0.5rem;
+    margin-left: 16rem;
+    width: 25px;
+    height: 25px;
+}
+.err{
+    margin-top: 0px;
+    padding: 0px;
+    height: 4px;
 }

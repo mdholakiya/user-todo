@@ -1,11 +1,12 @@
 import React from "react";
-import "./home.css"
+import { Link } from "react-router-dom";
 import Header from "../header/Header.jsx"
-function Home(){
-    return(
+import "./home.css"
+function Home() {
+    return (
         <>
-         <Header />
-        <h1 className="h">Welcome To ToDo App</h1>
+            <Header />
+            <Link to="/user/login" className="nextPage"><h1 className="h">Welcome To ToDo App</h1></Link>
         </>
     )
 }
