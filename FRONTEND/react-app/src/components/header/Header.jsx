@@ -28,7 +28,7 @@ function Header() {
 
   useEffect(() => {
     handleProfile()
-  },[])
+  })
 
   return (
     <>

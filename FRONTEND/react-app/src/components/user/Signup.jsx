@@ -1,9 +1,9 @@
 import React, { useState } from "react"
 import { BiSolidHide } from "react-icons/bi";
 import { BiSolidShow } from "react-icons/bi";
-import Header from "../header/Header"
 import { useNavigate, Link } from "react-router-dom";
-import { ToastContainer, toast } from 'react-toastify';
+import {toast } from 'react-toastify';
+import { signupUserRoute } from "../../api/user";
 import axios from "axios"
 import "./signup.css"
 
@@ -20,6 +20,26 @@ function Signup() {
 
     const inputChange = (event) => {
         const { name, value } = event.target;
+         if (!userDetails.name) {
+            setuserErr(true)
+            // error.name="user name is require"
+        }
+        else if (!userDetails.email) {
+            setuserErr(true)
+            // error.email="email is require"
+        }
+        else if (!userDetails.password) {
+            setuserErr(true)
+            // error.password="password is require"
+        }
+        else if (!userDetails.confirmPassword) {
+            setuserErr(true)
+            //  error.password="confirm-password is require"
+        }
+        else if (userDetails.confirmPassword !== userDetails.password ) {
+            setuserErr(true)
+            // error.password=" password should match with confirm-password "
+        }
         setuserDetails((preValue) => {
             return {
                 ...preValue,
@@ -30,32 +50,12 @@ function Signup() {
     }
 
     async function submitForm(e) {
-        
         e.preventDefault()
         if (!userDetails.name || !userDetails.email || !userDetails.password || !userDetails.confirmPassword || userDetails.confirmPassword !== userDetails.password ||userDetails.password.length<7) {
             setuserErr(true)
             // error.response="all fields are require"
         }
-        // if (!userDetails.name) {
-        //     setuserErr(true)
-        //     // error.name="user name is require"
-        // }
-        // else if (!userDetails.email) {
-        //     setuserErr(true)
-        //     // error.email="email is require"
-        // }
-        // else if (!userDetails.password) {
-        //     setuserErr(true)
-        //     // error.password="password is require"
-        // }
-        // else if (!userDetails.confirmPassword) {
-        //     setuserErr(true)
-        //     //  error.password="confirm-password is require"
-        // }
-        // else if (userDetails.confirmPassword !== userDetails.password ) {
-        //     setuserErr(true)
-        //     // error.password=" password should match with confirm-password "
-        // }
+       
         else {
             setuserErr(false)
             setshowPassword(false)
@@ -63,21 +63,20 @@ function Signup() {
             const email = e.target.email.value;
             const password = e.target.password.value;
             const confirmPass= e.target.confirmPassword.value;
-            await axios.post('http://localhost:3000/user/signup', { name, email, password,confirmPass })
+            await signupUserRoute({ name, email, password,confirmPass })
 
                 .then(response => {
                     console.log(userDetails,"signup");
                     console.log(response,"signup");
-                    toast.success("user created successfully")
-
-                    setTimeout(() => {
+                    toast.success(response.dara.message,{
+                        autoClose : 500
+                    })
                         navigate("/user/login")
 
-                    }, 1000)
                 })
                 .catch(error => {
                     if (error.status === 403) {
-                        toast.error("user already exist try to login")
+                        toast.error(error.response.data.message)
                     }
                     console.log(error)
 
@@ -89,7 +88,7 @@ function Signup() {
 
     return (
         <>
-            <Header />
+         
             <div className="signup">
                 <form action="" className="form" onSubmit={submitForm} >
                     <h2>SIGNUP</h2>
@@ -161,7 +160,6 @@ function Signup() {
                     <Link to="/user/login" className="loginLink">already have an account? try to login</Link>
 
                 </form>
-                <ToastContainer />
             </div>
 
         </>

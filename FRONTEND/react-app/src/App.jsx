@@ -8,12 +8,14 @@ import Page404 from './components/NotFound/NotFound';
 import "./app.css"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from "./components/header/Header";
+import { ToastContainer} from 'react-toastify';
 
 function App() {
 
   return (
     <>
       <BrowserRouter>
+      <Header />
         <Routes>
           <Route path="/" Component={Login}/>
           <Route path="/user/home" Component={Home}/>
@@ -24,6 +26,7 @@ function App() {
           <Route path="/toDo/add" Component={Todo} />
           <Route path="/*" Component={Page404} />
         </Routes>
+        <ToastContainer position="top-right " />
       </BrowserRouter>
 
     </>

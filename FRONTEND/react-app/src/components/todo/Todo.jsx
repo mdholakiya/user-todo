@@ -1,12 +1,22 @@
 import React from "react";
-import Header from "../header/Header";
+
 import "./todo.css"
 
 function Todo() {
+
     return (
         <>
-        <Header />
-        <h1 className="zzz" >todo data</h1>
+   
+        <div>
+        <h3 className="todo" >Create Your Todo</h3>
+        <button type="button" >Add+</button>
+        </div>
+
+        <form action="">
+
+        </form>
+
+
         </>
     )
 }

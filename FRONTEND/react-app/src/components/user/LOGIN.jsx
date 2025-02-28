@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import Header from "../header/Header"
 import { Link, useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import axios from "axios"
+import { loginUserRoute } from "../../api/user";
 import "./login.css"
 
 function Login() {
@@ -38,10 +38,10 @@ function Login() {
             setuserErr(true)
         }
         else {
-
+            setuserErr(false)
             const email = e.target.email.value;
             const password = e.target.password.value;
-            await axios.post('http://localhost:3000/user/login', { email, password })
+            await loginUserRoute({email, password})
                 .then((response) => {
                     console.log(userdata,"lohin data"); 
                     console.log(response,"login");
@@ -50,15 +50,15 @@ function Login() {
                     localStorage.setItem("Token", response.data.token)
                     localStorage.setItem("Username",response.data.user.name)
                     localStorage.setItem("Email", response.data.user.email)
-                    toast.success("user login successfully")
-                    setTimeout(()=>{
-                        navigate("/toDo/add")
-                        
+                    toast.success("user login successfully",{
+                        autoClose:500
                     })
+                      navigate("/toDo/add")
+                        
                 })
                 .catch((error) => { 
                      if(error.status ===400 || error.status===403 ||  error.status===404 ){
-                                            toast.error("user not found please enter correct details or try to signup.")
+                                            toast.error(error.response.data.message)
                                         }
                                         console.log(error)
                                         
@@ -69,7 +69,6 @@ function Login() {
 
 return (
     <>
-        <Header />
         <div className="login">
             <form action="" className="form" onSubmit={formSubmit}>
                 <h2>LOGIN</h2>
@@ -106,8 +105,6 @@ return (
                 </p>
 
             </form>
-
-    <ToastContainer />
         </div>
     </>
 )
