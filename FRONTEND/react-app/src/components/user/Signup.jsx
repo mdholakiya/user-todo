@@ -19,25 +19,6 @@ function Signup() {
     const navigate = useNavigate();
 
     const inputChange = (event) => {
-        if (!userDetails.name) {
-            setuserErr(true)
-        }
-        if (!userDetails.email) {
-            setuserErr(true)
-        }
-        if (!userDetails.password || userDetails.password.length < 8) {
-            setuserErr(true)
-        }
-        if (!userDetails.confirmPassword) {
-            setuserErr(true)
-        }
-        if (userDetails.confirmPassword !== userDetails.password ) {
-            setuserErr(true)
-        }
-        else {
-            setuserErr(false)
-        }
-
         const { name, value } = event.target;
         setuserDetails((preValue) => {
             return {
@@ -49,26 +30,50 @@ function Signup() {
     }
 
     async function submitForm(e) {
+        
         e.preventDefault()
-        if (!userDetails.name || !userDetails.email || !userDetails.password || !userDetails.confirmPassword) {
+        if (!userDetails.name || !userDetails.email || !userDetails.password || !userDetails.confirmPassword || userDetails.confirmPassword !== userDetails.password ||userDetails.password.length<7) {
             setuserErr(true)
-        } else {
+            // error.response="all fields are require"
+        }
+        // if (!userDetails.name) {
+        //     setuserErr(true)
+        //     // error.name="user name is require"
+        // }
+        // else if (!userDetails.email) {
+        //     setuserErr(true)
+        //     // error.email="email is require"
+        // }
+        // else if (!userDetails.password) {
+        //     setuserErr(true)
+        //     // error.password="password is require"
+        // }
+        // else if (!userDetails.confirmPassword) {
+        //     setuserErr(true)
+        //     //  error.password="confirm-password is require"
+        // }
+        // else if (userDetails.confirmPassword !== userDetails.password ) {
+        //     setuserErr(true)
+        //     // error.password=" password should match with confirm-password "
+        // }
+        else {
+            setuserErr(false)
             setshowPassword(false)
             const name = e.target.name.value;
             const email = e.target.email.value;
             const password = e.target.password.value;
-            // const confirmPass= e.target.confirmPassword.value;
-            await axios.post('http://localhost:3000/user/signup', { name, email, password })
+            const confirmPass= e.target.confirmPassword.value;
+            await axios.post('http://localhost:3000/user/signup', { name, email, password,confirmPass })
 
                 .then(response => {
-                    console.log(userDetails);
-                    console.log(response);
+                    console.log(userDetails,"signup");
+                    console.log(response,"signup");
                     toast.success("user created successfully")
 
                     setTimeout(() => {
                         navigate("/user/login")
 
-                    }, 4000)
+                    }, 1000)
                 })
                 .catch(error => {
                     if (error.status === 403) {
@@ -77,6 +82,7 @@ function Signup() {
                     console.log(error)
 
                 })
+               
 
         }
     }
@@ -93,9 +99,10 @@ function Signup() {
                         type="text"
                         placeholder="user name"
                         value={userDetails.name}
-                        onChange={inputChange} />
+                        onChange={inputChange}
+                        required />
                     <p className="err">
-                        {userErr ? <span className="alertMess"> UserName Is Require</span> : ""}
+                        {userErr && <span className="alertMess">username is require</span> }
                     </p>
 
                     <input className="input"
@@ -104,19 +111,20 @@ function Signup() {
                         id="email"
                         placeholder="email"
                         value={userDetails.email}
-                        onChange={inputChange} />
+                        onChange={inputChange} 
+                        required/>
                     <p className="err">
-                        {userErr ? <span className="alertMess">Email Is Require</span> : ""}
+                        {userErr && <span className="alertMess">Email Is Require</span> }
                     </p>
 
                     <div className="main">
                         {
                             showPassword ?
-                                <BiSolidShow className="login-pass-icon" onClick={() => {
-                                    setshowPassword(false)
-                                }} /> :
                                 <BiSolidHide className="login-pass-icon" onClick={() => {
-                                    setshowPassword(true)
+                                    setshowPassword(false) 
+                                }} />:
+                                    <BiSolidShow className="login-pass-icon" onClick={() => {
+                                        setshowPassword(true)
                                 }} />
                         }
                         <input className="input"
@@ -126,10 +134,11 @@ function Signup() {
                             placeholder="password"
                             value={userDetails.password}
                             onChange={inputChange}
+                            required
                         />
                     </div>
                     <p className="err">
-                        {userErr ? <span className="alertMess"> Password Is Require ex:Abcd1234</span> : ""}
+                        {userErr && <span className="alertMess"> Password Is Require min length:8 ex:Abcd1234</span> }
                     </p>
 
                         
@@ -140,9 +149,10 @@ function Signup() {
                         placeholder="confirm password"
                         onChange={inputChange}
                         value={userDetails.confirmPassword}
+                        required
                     />
                     <p className="err">
-                        {userErr ? <span className="alertMess">field require</span> : ""}
+                        {userErr && <span className="alertMess">enter correct password</span>}
                     </p>
 
                     <button className="butn"

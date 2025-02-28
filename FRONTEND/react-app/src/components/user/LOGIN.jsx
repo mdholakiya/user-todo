@@ -4,8 +4,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import axios from "axios"
 import "./login.css"
+
 function Login() {
-    const [userdata, setCheckuserdata] = useState({
+    const [userdata, setuserdata]= useState({
         email: "",
         password: ""
     })
@@ -16,13 +17,13 @@ function Login() {
         if (!userdata.email) {
             setuserErr(true)
         }
-        if (!userdata.password || userdata.password.length < 7) {
+        if (!userdata.password || userdata.password.length <7) {
             setuserErr(true)
         } else {
             setuserErr(false)
         }
         const { name, value } = event.target;
-        setCheckuserdata((preValue) => {
+        setuserdata((preValue) => {
             return {
                 ...preValue,
                 [name]: value
@@ -42,40 +43,44 @@ function Login() {
             const password = e.target.password.value;
             await axios.post('http://localhost:3000/user/login', { email, password })
                 .then((response) => {
-                    console.log(userdata); 
-                                        console.log(response);
-                                        toast.success("user login successfully")
-                                        
-                                        setTimeout(()=>{
-                                            navigate("/toDo/add")
-                                            
-                                        },4000)
+                    console.log(userdata,"lohin data"); 
+                    console.log(response,"login");
+                    // console.log(response.data.token,"token")
+
+                    localStorage.setItem("Token", response.data.token)
+                    localStorage.setItem("Username",response.data.user.name)
+                    localStorage.setItem("Email", response.data.user.email)
+                    toast.success("user login successfully")
+                    setTimeout(()=>{
+                        navigate("/toDo/add")
+                        
+                    })
                 })
                 .catch((error) => { 
-                     if(error.status ===400){
-                                            toast.error("user not found please enter correct details.")
+                     if(error.status ===400 || error.status===403 ||  error.status===404 ){
+                                            toast.error("user not found please enter correct details or try to signup.")
                                         }
                                         console.log(error)
                                         
             })
     }
 }
-// Navigate("/toDo/add")
 
 
 return (
     <>
         <Header />
-        <div className="signup">
+        <div className="login">
             <form action="" className="form" onSubmit={formSubmit}>
                 <h2>LOGIN</h2>
                 <input className="input"
                     type="email"
                     name="email"
                     id="email"
-                    Value={userdata.email}
+                    value={userdata.email}
                     onChange={checkdata}
                     placeholder="enter email"
+                    required
                 />
                 <p className="err">
                     {userErr ? <span className="alertMess">Email Is Require</span> : ""}
@@ -88,9 +93,10 @@ return (
                     onChange={checkdata}
                     value={userdata.password}
                     placeholder=" enter password"
+                    required
                 />
                 <p className="err">
-                    {userErr ? <span className="alertMess">password Is Require</span> : ""}
+                    {userErr ? <span className="alertMess">password Is Require. min-Length:8</span> : ""}
                 </p>
 
 

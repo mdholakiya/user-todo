@@ -7,6 +7,7 @@ import Login from './components/user/Login';
 import Page404 from './components/NotFound/NotFound';
 import "./app.css"
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Header from "./components/header/Header";
 
 function App() {
 

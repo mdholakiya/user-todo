@@ -1,8 +1,19 @@
 .signupLink{
     text-decoration: none;
     color: rgb(146, 27, 27);
-   /* margin: 24px; */
+   margin-top: 0px;
 }
 .p{
     margin-top: 110px !important;
+}
+.login{
+    margin: auto;
+    border: 2px solid white;
+    border-radius: 20px ;
+    width: 400px;
+    height:550px;
+    /* justify-content: center; */
+    box-shadow:5px 5px 5px 5px black;
+    margin-top:100px;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
 }
