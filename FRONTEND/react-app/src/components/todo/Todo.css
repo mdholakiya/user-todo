@@ -1,62 +1,24 @@
- /* import 'bootstrap/dist/css/bootstrap.min.css'; */
-
- body{
-    background-image:url("../../../public/back-groound.jpg") ;
-    background-repeat: no-repeat;
-    background-size: cover;
-    margin: 0px;
-    padding: 0px;
-    align-items: center;
-}
-
-.signup{
-     /* display:flex;  
-    align-items: center;
- flex-direction: column;
-    text-align: center;  */
-    margin: auto;
-    border: 2px solid white;
-    border-radius: 20px ;
-    width: 400px;
-    height:400px;
-    /* justify-content: center; */
-    box-shadow:5px 5px 5px 5px black;
-    margin-top:100px;
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
-}
-
-.form{
-     display:flex;
+.add {
+    /* display: flex; */
     align-items: center;
     text-align: center;
-    flex-direction: column;
-    gap: 20px;
-    margin-top: 30px;
+
 }
-.input{
-    width:300px;
-    height:40px;
-    border-radius:10px;
-    border: 2px solid white;
-    font-size: 15px;
-}
-.butn{
+.butn {
     text-align: center;
     height: 40px;
     width: 150px;
     font-size: 15px;
     font-weight: bold;
     background-color: white;
-    border: 2px solid white ;
-    border-radius: 10px ;
-    margin-top: 50px;
+    border: 2px solid white;
+    border-radius: 10px;
+    margin-top: 10px;
     background-color: rgb(184, 163, 184);
-   
+
 }
-.butn:hover{
+.butn:hover {
     background-color: rgb(85, 27, 88);
     color: white;
-}
-.zzz{
-    text-align: center;
+    
 }

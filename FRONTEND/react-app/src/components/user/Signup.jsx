@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import { BiSolidHide } from "react-icons/bi";
 import { BiSolidShow } from "react-icons/bi";
 import { useNavigate, Link } from "react-router-dom";
-import {toast } from 'react-toastify';
+import {toast,ToastContainer } from 'react-toastify';
 import { signupUserRoute } from "../../api/user";
 import axios from "axios"
 import "./signup.css"
@@ -16,6 +16,7 @@ function Signup() {
     })
     const [userErr, setuserErr] = useState(false)
     const [showPassword, setshowPassword] = useState(false)
+    const [confirmPassword, setconfirmPassword] = useState(false)
     const navigate = useNavigate();
 
     const inputChange = (event) => {
@@ -68,7 +69,7 @@ function Signup() {
                 .then(response => {
                     console.log(userDetails,"signup");
                     console.log(response,"signup");
-                    toast.success(response.dara.message,{
+                    toast.success(response.data.message,{
                         autoClose : 500
                     })
                         navigate("/user/login")
@@ -119,12 +120,13 @@ function Signup() {
                     <div className="main">
                         {
                             showPassword ?
+                            <BiSolidShow className="login-pass-icon" onClick={() => {
+                                setshowPassword(false)
+                        }} /> :
                                 <BiSolidHide className="login-pass-icon" onClick={() => {
-                                    setshowPassword(false) 
-                                }} />:
-                                    <BiSolidShow className="login-pass-icon" onClick={() => {
-                                        setshowPassword(true)
+                                setshowPassword(true) 
                                 }} />
+                              
                         }
                         <input className="input"
                             name="password"
@@ -140,16 +142,31 @@ function Signup() {
                         {userErr && <span className="alertMess"> Password Is Require min length:8 ex:Abcd1234</span> }
                     </p>
 
+                        <div>
+
                         
+                    {
+                            confirmPassword ?
+                            <BiSolidShow className="login-pass-icon" onClick={() => {
+                                setconfirmPassword(false)
+                        }} /> :
+                                <BiSolidHide className="login-pass-icon" onClick={() => {
+                                    setconfirmPassword(true) 
+                                }} />
+                              
+                        }
+
+               
                     <input className="input"
                         name="confirmPassword"
-                        type="password"
+                        type={confirmPassword ? "text" : "password"}
                         id="confirm-pass"
                         placeholder="confirm password"
                         onChange={inputChange}
                         value={userDetails.confirmPassword}
                         required
                     />
+                    </div>
                     <p className="err">
                         {userErr && <span className="alertMess">enter correct password</span>}
                     </p>
@@ -160,8 +177,7 @@ function Signup() {
                     <Link to="/user/login" className="loginLink">already have an account? try to login</Link>
 
                 </form>
-            </div>
-
+            </div>         
         </>
     )
 }

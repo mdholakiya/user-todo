@@ -24,9 +24,8 @@ function Profile() {
 
     async function getuser() {
         try {
-
             const data = await getUserRoute()
-            console.log(data, "-------------")
+            // console.log(data, "-------------")
             setuserName(data.data.user.name)
             setuserEmail(data.data.user.email)
         }
@@ -40,31 +39,7 @@ function Profile() {
         getuser()
     }, [])
 
-    async function userCloseAccount(e) {
-        e.preventDefault()
-        const email = userEmail;
-        await deleteUserRoute({ email })
-
-            .then(response => {
-                console.log(response, "user data delete");
-                toast.success(response.data.message, {
-                    autoClose: 500
-                })
-                navigate("/user/login")
-            })
-            .catch(error => {
-                if (error.status === 404) {
-                    toast.error(error.response.data.message, {
-                        autoClose: 1000
-                    })
-                }
-                console.log(error)
-
-            })
-    }
-
-    async function updateUserData(e) {
-        e.preventDefault()
+    async function updateUserData() {
         const name = userName;
         const email = userEmail;
         await updateUserRoute({ name, email })
@@ -77,38 +52,53 @@ function Profile() {
             })
             .catch(error => {
                 if (error.status === 403) {
-                    toast.error(error.response.data.message, {
-                        autoClose: 1000
-                    })
+                    toast.error(error.response.data.message)
                 }
                 console.log(error)
 
             })
     }
 
-    function submitData(e){
-        e.preventDefault()
-       
+    async function userCloseAccount() {
+        // e.preventDefault()
+        const email = userEmail;
+        await deleteUserRoute({ email })
+            .then(response => {
+                // console.log(response, "user data delete");
+                toast.success(response.data.message, {
+                    autoClose: 500
+                })
+                navigate("/")
+
+            })
+            .catch(error => {
+                if (error.status === 404) {
+                    toast.error(error.response.data.message)
+                }
+                console.log(error)
+
+            })
     }
 
+    function submitData(e) {
+        e.preventDefault()
+
+    }
     async function changetext() {
-        updateUserData() 
-        // e.preventDefault()
+        updateUserData()
         setchangeData(!changeData)
     }
     function deleteUser() {
         userCloseAccount()
-        // e.preventDefault()
         setcloseUser(!closeUser)
-      
+
     }
 
     return (
         <>
-         
             <h1 className="info">Details</h1>
             <form onSubmit={submitData}>
-                <div className="details">
+                <div className="d">
 
                     <input type="text"
                         name="name"
@@ -123,12 +113,13 @@ function Profile() {
                         onChange={changeEmail}
                     />
                     {
-                         <button type="sumbit" onSubmit={changetext} className="changeData">update</button> 
+                        <button type="sumbit" onClick={changetext} className="changeData">update</button>
                     }
 
                     {
-                      <button type="submit" onSubmit={deleteUser} className="changeData">delete account</button> 
+                        <button type="submit" onClick={deleteUser} className="changeData">delete account</button>
                     }
+
                 </div>
             </form>
         </>

@@ -1,0 +1,119 @@
+body {
+    background-image: url("../../../public/back-groound.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0px;
+    padding: 0px;
+    align-items: center;
+}
+
+.add {
+    /* display: flex; */
+    align-items: center;
+    text-align: center;
+
+}
+
+.input {
+    width: 300px;
+    height: 40px;
+    border-radius: 10px;
+    border: 2px solid white;
+    font-size: 15px;
+}
+
+.butn {
+    text-align: center;
+    height: 40px;
+    width: 150px;
+    font-size: 15px;
+    font-weight: bold;
+    background-color: white;
+    border: 2px solid white;
+    border-radius: 10px;
+    margin-top: 50px;
+    background-color: rgb(184, 163, 184);
+
+}
+
+.butn:hover {
+    background-color: rgb(85, 27, 88);
+    color: white;
+}
+
+.zzz {
+    text-align: center;
+}
+
+.head {
+    display: flex;
+    justify-content: space-around;
+}
+
+.add {
+    text-align: end;
+}
+
+.tododetails{
+    display: flex;
+    margin: auto;
+    flex-direction: column;
+    gap: 15px;
+    border: 2px solid white;
+    border-radius: 20px;
+    width: 1600px;
+    height: 350px;
+    box-shadow: 5px 5px 5px 5px black;
+    margin-top: 20px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    padding:20px;
+   
+}
+.thead {
+    border: 3px solid black;
+    height: 50px;
+    align-items: center;
+    /* display: flex; */
+    width: 1500px;
+    padding:4PX;
+}
+
+tr>th{
+    border: 2px solid black;
+    height: 30px;
+    text-align: center;
+    width: 1000px;
+    margin: 3px; 
+}
+.tbody{
+    margin-bottom: 10px;
+    padding:5PX;
+    /* display: flex;
+    flex-direction: column; */
+    gap: 2px;
+    border: 3px solid black;
+    align-items: center;
+    width: 1500px;
+    overflow:scroll;
+}
+tr>td{
+    border: 2px solid black;
+    height: 40px;
+    text-align: center;
+    width: 1000px;
+}
+.option{
+    width:60px;
+    
+    margin:1px;
+    padding: 2px;
+    border-radius: 10px;
+ 
+    color: red;
+    background-color: rgb(26, 26, 26);
+}
+
+.option:hover{
+    background-color: brown;
+    color: white;
+}

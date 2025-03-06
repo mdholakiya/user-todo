@@ -1,21 +1,24 @@
 import React, { useEffect, useState } from "react";
 import Container from 'react-bootstrap/Container';
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { FaUserCircle } from "react-icons/fa";
 import "./header.css"
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 
 function Header() {
   const [visibleDetails, setvisibleDerails] = useState(false)
   const [showHeader, setshowHeader] = useState(false)
 
+  const navigate = useNavigate()
   const token = localStorage.getItem("Token")
   // console.log(token)
-  function prevent(e){
-    e.preventDefault()
-  }
+  // function prevent(e) {
+  //   e.preventDefault()
+  //   // setvisibleDerails(!visibleDetails)
+  // }
 
   function handleProfile() {
     if (token) {
@@ -30,6 +33,18 @@ function Header() {
     handleProfile()
   })
 
+  const logout = () => {
+    localStorage.clear()
+    navigate("/")
+    
+  }
+
+  const myProfile = () => {
+    navigate("/user/profile")
+  }
+  const myTodo = () => {
+    navigate("/toDo/add")
+  }
   return (
     <>
 
@@ -37,35 +52,40 @@ function Header() {
         <Container>
           <Navbar.Brand className="head" as={Link} to="/user/home" href="/user/home">USER TODO</Navbar.Brand>
           <Nav className="me-auto" >
-            {/* <Nav.Link as={Link} to="/user/signup" href="/user/signup" >SIGNUP</Nav.Link>
-            <Nav.Link  as={Link} to="/user/login" href="/user/login" >LOGIN</Nav.Link> */}
-            {/* <Nav.Link as={Link} to="/" href="/">HOME</Nav.Link> */}
-            {/* <Nav.Link href="#logout">TODO</Nav.Link>
-            <Nav.Link href="#about">LOGOUT</Nav.Link> */}
           </Nav>
-{showHeader ?  
-<>
-            < FaUserCircle className="profile" onSubmit={prevent} onClick={() => {
-              setvisibleDerails(!visibleDetails)
-            }} />
+          {showHeader ?
+            <>
+              < FaUserCircle className="profile"
+                onClick={() => {
 
-            {visibleDetails ?
-              <div className="profile-popup">
-                <Link to="/user/profile" className="profile-link-popup">
-                  <li >My Profile</li>
-                </Link>
-                <Link className="profile-link-popup">
-                  <li>Change Password</li>
-                </Link>
-                <Link className="profile-link-popup" >
-                  <li>Logout</li>
-                </Link>
+                  setvisibleDerails(!visibleDetails)
+                }}
+              />
 
-              </div>
-              
-              : null}
+              {visibleDetails ?
+                <div className="profile-popup">
+
+                  <div className="profile-link-popup">
+                    <li onClick={myProfile}>My Profile</li>
+                  </div>
+
+                  <div className="profile-link-popup">
+                    <li>Change Password</li>
+                  </div>
+
+                  <div className="profile-link-popup">
+                    <li onClick={myTodo}>Todo Items</li>
+                  </div>
+
+                  <div className="profile-link-popup">
+                    <li onClick={logout}>Logout</li>
+                  </div>
+
+                </div>
+
+                : null}
             </>
-          : null}
+            : null}
 
 
         </Container>

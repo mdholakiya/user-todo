@@ -9,7 +9,7 @@ const DELETEUSER_DELATE_URL = "user/delete";
 export const signupUserRoute = (data) => {
     return instance.post(SIGNUP_USER_POST_URL, data);
 };
-export const loginUserRoute = (data) => {
+export const loginUserRoute =(data) => {
     return instance.post(`${LOGIN_USER_POST_URL}`, data);
 };
 export const getUserRoute = () => {
@@ -18,6 +18,6 @@ export const getUserRoute = () => {
 export const updateUserRoute = (data) => {
     return instance.patch(`${UPDAUSER_PATCH_URL}`, data);
 };
-export const deleteUserRoute = (data) => {
-    return instance.delete(`${DELETEUSER_DELATE_URL}`, data);
+export const deleteUserRoute = () => {
+    return instance.delete(DELETEUSER_DELATE_URL);
 };
