@@ -103,17 +103,15 @@ tr>td{
     width: 1000px;
 }
 .option{
-    width:60px;
-    
+    width:60px; 
     margin:1px;
-    padding: 2px;
+    padding:1px;
     border-radius: 10px;
- 
-    color: red;
-    background-color: rgb(26, 26, 26);
+    color: rgb(245, 244, 244);
+    background-color:rgb(146, 23, 74);
 }
 
 .option:hover{
-    background-color: brown;
-    color: white;
+    background-color: rgb(234, 125, 125);
+    color: rgb(7, 7, 7);
 }

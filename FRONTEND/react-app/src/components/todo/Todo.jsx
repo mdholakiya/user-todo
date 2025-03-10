@@ -4,7 +4,8 @@ import Tabel from "./Tabel";
 import { toast } from 'react-toastify';
 import "./todo.css"
 import { useNavigate } from "react-router-dom";
-import { getTodoRoute, updateTodoRoute, loginTodoRoute, deleteTodoRoute } from "../../api/todo";
+import { getTodoRoute, deleteTodoRoute } from "../../api/todo";
+import { getUser } from "../../../../../BACKEND/node-express--api/src/api/controller/user";
 // import { getTodoRoute } from "../../api/todo/index.js";
 // import { useEffect } from "react";
 
@@ -12,13 +13,24 @@ function Todo() {
     const navigate = useNavigate()
     const [data, setData] = useState([]);
     const [selectTodoItem, setselectTodoItem] = useState("")
-
+    
+    
+        useEffect(() => {
+            getUserTodo()
+            // data
+    
+        }, [])
 
     const getUserTodo = async () => {
         try {
             const response = await getTodoRoute()
             console.log(response, "data...");
-            setData(response.data.todo)
+            if (Array.isArray(response.data.todo)) {
+                setData(response.data.todo);
+                console.log(response.data.todo,"iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii")
+            } else {
+                setData([]);
+            }
         }
         catch (err) {
             console.log(err, "error.....");
@@ -27,6 +39,7 @@ function Todo() {
 
     const editData = (todo) => {
         setselectTodoItem(todo)
+        // getUserTodo()
     }
 
     async function deleteData(id) {
@@ -44,11 +57,8 @@ function Todo() {
 
     }
 
-    useEffect(() => {
-        // alert("refresh main")
-        getUserTodo()
-        console.log("qqqqqqqqqqqqqqqqqqqqqqq")
-    }, [])
+    
+    console.log(data, "datatatatatatatataattatatatattataaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 
     return (
         <>
@@ -56,12 +66,14 @@ function Todo() {
                 <div className="head">
                     <h3 >Create Your Todo</h3>
                     <button type="submit" className="butn add" onClick={() => {
-                        navigate("/toDo/newAdd")
+                        navigate("/todo/newAdd")
                     }}>ADD+</button>
                 </div>
             </div>
+
             <CreateTodo
                 getTodo={data}
+                getUser={getUserTodo}
                 selectTodoItem={selectTodoItem}
             />
 
@@ -72,6 +84,7 @@ function Todo() {
             />
 
         </>
+
     )
 }
 export default Todo

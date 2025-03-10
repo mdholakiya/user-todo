@@ -25,19 +25,19 @@ function Signup() {
             setuserErr(true)
             // error.name="user name is require"
         }
-        else if (!userDetails.email) {
+         if (!userDetails.email) {
             setuserErr(true)
             // error.email="email is require"
         }
-        else if (!userDetails.password) {
+         if (!userDetails.password) {
             setuserErr(true)
             // error.password="password is require"
         }
-        else if (!userDetails.confirmPassword) {
+         if (!userDetails.confirmPassword) {
             setuserErr(true)
             //  error.password="confirm-password is require"
         }
-        else if (userDetails.confirmPassword !== userDetails.password ) {
+         if (userDetails.confirmPassword !== userDetails.password ) {
             setuserErr(true)
             // error.password=" password should match with confirm-password "
         }
@@ -56,6 +56,7 @@ function Signup() {
             setuserErr(true)
             // error.response="all fields are require"
         }
+        
        
         else {
             setuserErr(false)
@@ -101,9 +102,9 @@ function Signup() {
                         value={userDetails.name}
                         onChange={inputChange}
                         required />
-                    <p className="err">
-                        {userErr && <span className="alertMess">username is require</span> }
-                    </p>
+                    {/* <p className="err">
+                        {userErr ? <span className="alertMess">username is require</span> :"" }
+                    </p> */}
 
                     <input className="input"
                         name="email"
@@ -113,9 +114,9 @@ function Signup() {
                         value={userDetails.email}
                         onChange={inputChange} 
                         required/>
-                    <p className="err">
-                        {userErr && <span className="alertMess">Email Is Require</span> }
-                    </p>
+                    {/* <p className="err">
+                        {userErr ? <span className="alertMess">Email Is Require</span> :"" }
+                    </p> */}
 
                     <div className="main">
                         {
@@ -138,9 +139,9 @@ function Signup() {
                             required
                         />
                     </div>
-                    <p className="err">
-                        {userErr && <span className="alertMess"> Password Is Require min length:8 ex:Abcd1234</span> }
-                    </p>
+                    {/* <p className="err">
+                        {userErr ? <span className="alertMess"> Password Is Require min length:8 ex:Abcd1234</span> :"" }
+                    </p> */}
 
                         <div>
 
@@ -167,9 +168,9 @@ function Signup() {
                         required
                     />
                     </div>
-                    <p className="err">
-                        {userErr && <span className="alertMess">enter correct password</span>}
-                    </p>
+                    {/* <p className="err">
+                        {userErr ? <span className="alertMess">enter correct password</span> :""}
+                    </p> */}
 
                     <button className="butn"
                         type="submit">submit</button>

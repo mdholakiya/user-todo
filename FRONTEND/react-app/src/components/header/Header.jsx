@@ -43,16 +43,15 @@ function Header() {
     navigate("/user/profile")
   }
   const myTodo = () => {
-    navigate("/toDo/add")
+    navigate("/todo/add")
   }
   return (
     <>
 
       <Navbar bg="transperant" className="navi" >
         <Container>
-          <Navbar.Brand className="head" as={Link} to="/user/home" href="/user/home">USER TODO</Navbar.Brand>
-          <Nav className="me-auto" >
-          </Nav>
+          <Navbar.Brand className="head" as={Link} to="/" href="/">USER TODO</Navbar.Brand>
+          {/* <Nav className="me-auto" ></Nav> */}
           {showHeader ?
             <>
               < FaUserCircle className="profile"

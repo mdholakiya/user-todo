@@ -65,6 +65,7 @@ function Profile() {
         await deleteUserRoute({ email })
             .then(response => {
                 // console.log(response, "user data delete");
+                localStorage.clear()
                 toast.success(response.data.message, {
                     autoClose: 500
                 })

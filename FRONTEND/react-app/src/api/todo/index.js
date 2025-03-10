@@ -1,9 +1,9 @@
 import instance from "../../utils/apiHelper";
 
-const ADD_TODO_POST_URL = "toDo/add";
-const GETTODO_GET_URL = "toDo/data";
-const UPDATODO_PATCH_URL = "toDo/upd";
-const DELETETODO_DELATE_URL = "toDo/del";
+const ADD_TODO_POST_URL = "todo/add";
+const GETTODO_GET_URL = "todo/data";
+const UPDATODO_PATCH_URL = "todo/upd";
+const DELETETODO_DELATE_URL = "todo/del";
 
 export const loginTodoRoute = (data) => {
     return instance.post(`${ADD_TODO_POST_URL}`, data);

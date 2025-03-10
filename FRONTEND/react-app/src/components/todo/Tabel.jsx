@@ -1,25 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { MdDeleteForever } from "react-icons/md";
 import { MdEdit } from "react-icons/md";
 import { LuNotebookPen } from "react-icons/lu";
 import "./tabel.css"
-import { Link } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+// import CreateTodo from "./CreateTodo";
+// import { useState } from "react";
 
 
-function Tabel({getTodo,deleteTodo,editTodo})  {
- 
-    // const[loading,setloading]=useState(false)
-    // const [data, setData] = useState([data])
-    // const [editBtn, seteditBtn] = useState(false)
-    // const navigate = useNavigate()
+function Tabel({getTodo, deleteTodo, editTodo }) {
+    useEffect(()=>{
+      getTodo
+    },[])
 
-    // useEffect(() => {
-    //         // alert("refresh main")
-    //         getTodo
-    //         console.log("qqqqqqqqqqqqqqqqqqqqqqq")
-    //     })
+    const navigate = useNavigate()
+    const location = useLocation()
+    //  const [selectedTodo, setSelectedTodo] = useState(null);
 
-    console.log(getTodo, "-----------fggdgg-");
+
+    console.log(getTodo, "-----------fggdgg----------------------------------------");
+    // console.log(items,"ggggggggggggggggggggggggggggggggggggggggggg")
     return (
         <>
 
@@ -35,7 +35,7 @@ function Tabel({getTodo,deleteTodo,editTodo})  {
                     </tr>
                 </thead>
                 <tbody className="tbody">
-                    {getTodo?.length>0 && getTodo.map((items) => {
+                    {getTodo?.length > 0 && getTodo.map((items) => {
                         return (
                             <tr key={items.id}>
                                 <td>{items.id}</td>
@@ -45,28 +45,36 @@ function Tabel({getTodo,deleteTodo,editTodo})  {
                                 <td>{items.discription}</td>
                                 <td>
 
+
                                     <button className="option"
                                         onClick={() => {
                                             editTodo(items)
+                                          
                                         }}>
                                         <MdEdit />
                                     </button>
 
-                                    <Link to={"/toDo/newAdd"}>
-                                        <button className="option" type="submit"><LuNotebookPen /></button>
-                                    </Link>
 
-                                    <button className="option" onClick={()=>
-                                        {
-                                            deleteTodo(items.id)   
-                                        }}><MdDeleteForever /></button>
+                                    <button className="option" onClick={() => {
+                                        // console.log(items,"ooooooooooooooooooooooooooooooooooo")
+                                        // localStorage.setItem( JSON.stringify(items));
+                                        navigate("/todo/newAdd", { state: { todo: items } });
+                                        editTodo(items)
+                                    }}
+                                        type="submit"><LuNotebookPen /></button>
+
+
+                                    <button className="option" onClick={() => {
+                                        deleteTodo(items.id)
+                                    }}><MdDeleteForever /></button>
+
                                 </td>
                             </tr>
                         )
-                    
+
                     }
                     )}
-                
+
                 </tbody>
             </table>
 

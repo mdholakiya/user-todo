@@ -38,6 +38,7 @@ function Login() {
 
     async function formSubmit(e) {
         e.preventDefault()
+        
         if (!userdata.email || !userdata.password) {
             setuserErr(true)
             // console.log(email,"fffffffff")
@@ -60,7 +61,7 @@ function Login() {
                         toast.success(response.data.message, {
                             autoClose: 500
                         })
-                        navigate("/toDo/add")
+                        navigate("/todo/add")
                     // }
                     // if ( response.status === 403) {
                     //     toast.error(response.data.message)

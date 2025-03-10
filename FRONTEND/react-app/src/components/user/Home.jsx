@@ -1,11 +1,14 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./home.css"
 function Home() {
+    const Token = localStorage.getItem("Token")
+    const navigate = useNavigate();
+
     return (
         <>
-           
-            <Link to="/user/login" className="nextPage"><h1 className="h">Welcome To ToDo App</h1></Link>
+            <div className="nextPage" onClick={() => { Token ? null : navigate('/user/login')}}><h1 className="h">Welcome To ToDo App
+                </h1 ></div >
         </>
     )
 }
