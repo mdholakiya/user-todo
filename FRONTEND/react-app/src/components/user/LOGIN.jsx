@@ -72,10 +72,10 @@ function Login() {
                     if (error.status === 500  || error.status === 403 ) {
                  toast.error(error.response.data.message)
                     }
-                    if (error.status === 400) {
+                    // if (error.status === 400) {
                 
-                        toast.error(error.response.data.err[0].msg)
-                    }
+                    //     toast.error(error.response.data.err[0].msg)
+                    // }
 
 
                 })

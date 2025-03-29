@@ -1,5 +1,5 @@
 body{
-    background-image:url("../../../public/back-groound.jpg") ;
+    background-image:url("/back-groound.jpg") ;
     background-repeat: no-repeat;
     background-size: cover;
     background-position:center;

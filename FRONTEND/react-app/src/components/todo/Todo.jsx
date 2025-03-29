@@ -5,9 +5,7 @@ import { toast } from 'react-toastify';
 import "./todo.css"
 import { useNavigate } from "react-router-dom";
 import { getTodoRoute, deleteTodoRoute } from "../../api/todo";
-import { getUser } from "../../../../../BACKEND/node-express--api/src/api/controller/user";
-// import { getTodoRoute } from "../../api/todo/index.js";
-// import { useEffect } from "react";
+// import { getUser } from "../../../../../BACKEND/node-express--api/src/api/controller/user";
 
 function Todo() {
     const navigate = useNavigate()
