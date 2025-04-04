@@ -72,10 +72,10 @@ function Login() {
                     if (error.status === 500  || error.status === 403 ) {
                  toast.error(error.response.data.message)
                     }
-                    // if (error.status === 400) {
+                    if (error.status === 400) {
                 
-                    //     toast.error(error.response.data.err[0].msg)
-                    // }
+                        toast.error(error.response.data.err[0].msg)
+                    }
 
 
                 })
@@ -95,11 +95,11 @@ function Login() {
                         value={userdata.email}
                         onChange={checkdata}
                         placeholder="enter email"
-                    // required
+                    required
                     />
-                    <p className="err">
+                    {/* <p className="err">
                         {userErr ? <span className="alertMess">Email Is Require</span> : ""}
-                    </p>
+                    </p> */}
 
                     <div>
                         {
@@ -119,12 +119,12 @@ function Login() {
                             value={userdata.password}
                             onChange={checkdata}
                             placeholder=" enter password"
-                        // required
+                        required
                         />
                     </div>
-                    <p className="err">
+                    {/* <p className="err">
                         {userErr ? <span className="alertMess">password Is Require. min-Length:8</span> : ""}
-                    </p>
+                    </p> */}
 
 
                     <button className="butn" type="submit" >submit</button>

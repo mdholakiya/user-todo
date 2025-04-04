@@ -71,7 +71,7 @@ function Signup() {
                     console.log(userDetails,"signup");
                     console.log(response,"signup");
                     toast.success(response.data.message,{
-                        autoClose : 500
+                        autoClose : 100
                     })
                         navigate("/user/login")
 

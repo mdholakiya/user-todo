@@ -7,7 +7,7 @@
     align-items: center;
     text-align: center;
     gap: 50px;
-    height: 400px;
+    height: 500px;
     width: 400px;
     border: 2px solid white;
     border-radius: 20px;
@@ -31,4 +31,48 @@
 .changeData:hover{
     color: white;
     background-color: black;
+}
+#file{
+    align-items:center;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    background-color: rgb(228, 225, 225);  
+    padding: 0px ;
+    margin: 0px 0px 0px 0px 0px;
+    /* background-image:url(../../../public/profile.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size:100px; */
+    
+}
+#fileAdd{
+    background-color:transparent;
+    border-color: rgb(243, 243, 243);
+    /* border-radius: 50% ; */
+    margin-top:80px;
+    list-style: none;
+    margin-left: 45px;
+}
+.icon{
+    display:flex;
+    margin-top: 20px;
+    margin-left: 18px;
+    height:60px;
+    width:60px;
+}
+.Plus{
+    /* margin-top:20px;    */
+    margin-left: 40px;
+    margin-bottom: 60px;
+    height:20px;
+    width:20px;
+}
+.profile-image{
+    display:flex;
+    /* margin-top: 20px; */
+    /* margin-left: 18px; */
+    height:100px;
+    width:100px;
+    border-radius: 50%;
 }
